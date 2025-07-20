@@ -7,14 +7,11 @@ import { useMovie } from "./hooks/useMovie";
 function App() {
   const { movies } = useMovie()
 
-  const inputRef = useRef();
-
   const handleSubmit = (event)=> {
     event.preventDefault();
-    const inputEl = inputRef.current;
-    const value = inputEl.value;
-
-    console.log({value});
+    const fields = Object.fromEntries( new FormData(event.target));
+    const {query} = fields;
+    console.log(query);
   }
 
   return (
@@ -23,7 +20,7 @@ function App() {
         <header>
           <h1>Buscador de películas</h1>
           <form onSubmit={handleSubmit}>
-            <input name="query" ref={inputRef} placeholder="Avengers, Matrix, Harry Potter, ..." />
+            <input name="query" placeholder="Avengers, Matrix, Harry Potter, ..." />
             <button type="submit">Buscar</button>
           </form>
         </header>
