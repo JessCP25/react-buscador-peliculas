@@ -10,18 +10,19 @@ function App() {
   const [sort, setSort] = useState(false);
   const { movies, getMovies } = useMovie({search, sort})
 
-  const debounceGetMovies = useCallback( debounce(search => {
+  const debounceGetMovies = useCallback(debounce(search => {
     getMovies({search})
-  }, 300), [])
-  
+  }, 500), [getMovies])
+
   const handleSubmit = (event) =>{
     event.preventDefault();
     getMovies({search})
   }
 
   const handleChange = (event)=> {
-    setSearch(event.target.value)
-    debounceGetMovies(search)
+    const newSearch = event.target.value
+    setSearch(newSearch)
+    debounceGetMovies(newSearch)
   }
 
   const handleSort = () => {
