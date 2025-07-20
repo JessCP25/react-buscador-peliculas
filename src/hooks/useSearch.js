@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useSearch(){
   const [search, setSearch] = useState('');
   const [error, setError] = useState();
+  const firstSearch = useRef(true)
 
   useEffect(()=>{
+
+    if(firstSearch.current){
+      firstSearch.current = search === '';
+      return
+    }
+
     if(search === ''){
       setError('Tiene que ingresar un valor de busqueda')
       return;
