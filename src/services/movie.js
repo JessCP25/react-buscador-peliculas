@@ -1,4 +1,4 @@
-const API_KEY = '493a28bc'
+const API_KEY = import.meta.API_KEY;
 
 export async function searchMovies({search}){
   if(search === '') return;
